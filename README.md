@@ -1,12 +1,10 @@
 # TODO:
 
-packer - done I think :) - I have it as an opt plugin, we'll see how that goes
+Get gx working with links... How do you source a vim file in Lua?
 
-treesitter
+treesitter - 
 
-nvim-compe
 lsp-go
-lsp-pyright
 lsp-lua
 lsp-bash?
 
@@ -15,10 +13,16 @@ gitlens?
 
 https://www.reddit.com/r/neovim/comments/mbtboe/neovim_05_lsp_treesitter_compe_indentblankline/
 
-https://github.com/lewis6991/gitsigns.nvim
 
 https://github.com/mjlbach/defaults.nvim
 
 https://github.com/mattn/efm-langserver
 
-Let's just put the vim in there and change it later.
+https://github.com/rockerBOO/awesome-neovim
+
+# DONE
+
+packer - working :)
+nvim-compe - working :)
+lsp-pyright - got it - will probably want to check for venvs, but whatever
+https://github.com/lewis6991/gitsigns.nvim - done enough - could change colors to look better, but colorscheme might do that anyway

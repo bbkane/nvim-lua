@@ -19,9 +19,11 @@ require('packer').startup(function()
 	-- Let's just ignore treesitter for now :)
 	-- https://github.com/nvim-treesitter/nvim-treesitter
 	-- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-	--
-	--
-	use 'lewis6991/gitsigns.nvim'
+
+  use {
+    'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' },
+  }
+
 	use 'neovim/nvim-lspconfig'
 	use 'hrsh7th/nvim-compe'
 end)
@@ -58,6 +60,25 @@ vim.o.completeopt="menuone,noinsert,noselect"
 
 -- volta install pyright
 nvim_lsp.pyright.setup{}
+-- volta install bash-language-server
+nvim_lsp.bashls.setup{}
+-- brew install efm-langserver
+nvim_lsp.efm.setup {
+    init_options = {documentFormatting = true},
+    settings = {
+        rootMarkers = {".git/"},
+        languages = {
+            lua = {
+                {formatCommand = "lua-format -i", formatStdin = true}
+            },
+            -- not working - https://github.com/mattn/efm-langserver - could also just try the yaml thing
+            -- https://github.com/ChristianChiarulli/LunarVim/blob/0eeaa72729e594a8e17acc17381597ee1cf64e96/lua/lsp/efm-general-ls.lua
+            python = {
+                { LintCommand = 'flake8 --stdin-display-name ${INPUT} -', lintStdin = true, lintFormats = { '%f:%l:%c: %m' } }
+            },
+        }
+    }
+}
 
 -- nvim-compe
 
@@ -128,6 +149,21 @@ vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 -- personal settings
+
+vim.o.termguicolors = true
+
+-- for gitsigns
+require('gitsigns').setup {
+  signs = {
+    add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+    change       = {hl = 'GitSignsChange', text = '+', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+  },
+}
+vim.o.updatetime = 250
+vim.wo.signcolumn="yes"
 
 -- less lua for now
 vim.api.nvim_exec([[
