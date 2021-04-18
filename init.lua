@@ -13,7 +13,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Load plugins
-require('packer').startup(function()
+require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
 	use 'tpope/vim-commentary'
 	-- Let's just ignore treesitter for now :)
@@ -62,9 +62,11 @@ vim.o.completeopt="menuone,noinsert,noselect"
 nvim_lsp.pyright.setup{}
 -- volta install bash-language-server
 nvim_lsp.bashls.setup{}
+-- TODO: come back to this once I have LUA working
 -- brew install efm-langserver
 nvim_lsp.efm.setup {
     init_options = {documentFormatting = true},
+    filetypes = {"lua", "python"},
     settings = {
         rootMarkers = {".git/"},
         languages = {
@@ -79,6 +81,32 @@ nvim_lsp.efm.setup {
         }
     }
 }
+
+local sumneko_root_path = vim.fn.getenv("HOME") .. "/Git-personal/lua-language-server"
+
+nvim_lsp.sumneko_lua.setup {
+  cmd = {sumneko_root_path.."/bin/macOS/lua-language-server", "-E", sumneko_root_path.."/main.lua" };
+  on_attach = on_attach,
+  settings = {
+      Lua = {
+          runtime = {
+              version = 'LuaJIT',
+              path = vim.split(package.path, ';'),
+          },
+          diagnostics = {
+              globals = {'vim'},
+          },
+          workspace = {
+              library = {
+                  [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                  [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+              },
+          },
+      },
+  },
+}
+
+vim.lsp.set_log_level("debug")
 
 -- nvim-compe
 
