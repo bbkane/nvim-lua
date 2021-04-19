@@ -1,3 +1,10 @@
+# Goals
+
+- LSP and other neovimmy goodness
+- mostly or all Lua for speed to try to get a faster startup time (CoC is sooo slow at startup)
+- document dependencies (lua-language-server, pyright, ...)
+- Mac only (for now)
+
 # TODO:
 
 Get gx working with links... How do you source a vim file in Lua?
