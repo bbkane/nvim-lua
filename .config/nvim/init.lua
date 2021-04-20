@@ -26,6 +26,7 @@ require('packer').startup(function(use)
 
 	use 'neovim/nvim-lspconfig'
 	use 'hrsh7th/nvim-compe'
+  use 'morhetz/gruvbox'
 end)
 
 -- LSP settings
@@ -178,7 +179,18 @@ vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 -- personal settings
 
+-- open word under cursor - useful for links - MacOS specific
+-- https://github.com/vim/vim/issues/4738#issuecomment-798790444
+-- https://github.com/nanotee/nvim-lua-guide#defining-mappings
+vim.api.nvim_set_keymap(
+  'n',
+  'gx',
+  [[<Cmd>lua vim.fn.system('open ' .. vim.fn.expand("<cWORD>"))<CR>]],
+  { noremap = true, silent = true }
+)
+
 vim.o.termguicolors = true
+vim.cmd[[colorscheme gruvbox]]
 
 -- for gitsigns
 require('gitsigns').setup {

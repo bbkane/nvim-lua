@@ -6,23 +6,18 @@
 - Mac only (for now)
 
 # TODO:
-
-Get gx working with links... How do you source a vim file in Lua?
-
-lsp-go
-
-lsp-bash?
-
-https://github.com/mjlbach/defaults.nvim
-
 https://github.com/mattn/efm-langserver - pausing till I have lua working :)
 
-https://github.com/rockerBOO/awesome-neovim
 
+lsp-go
+lsp-bash?
+https://github.com/mjlbach/defaults.nvim
+https://github.com/rockerBOO/awesome-neovim
 treesitter
 
 # DONE
 
+get gx working on links - custom lua baby!
 efm-pyright
 lsp-lua
 plugins!
