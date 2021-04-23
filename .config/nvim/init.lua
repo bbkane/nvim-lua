@@ -63,25 +63,25 @@ vim.o.completeopt="menuone,noinsert,noselect"
 nvim_lsp.pyright.setup{}
 -- volta install bash-language-server
 nvim_lsp.bashls.setup{}
--- TODO: come back to this once I have LUA working
 -- brew install efm-langserver
-nvim_lsp.efm.setup {
-    init_options = {documentFormatting = true},
-    filetypes = {"lua", "python"},
-    settings = {
-        rootMarkers = {".git/"},
-        languages = {
-            lua = {
-                {formatCommand = "lua-format -i", formatStdin = true}
-            },
-            -- not working - https://github.com/mattn/efm-langserver - could also just try the yaml thing
-            -- https://github.com/ChristianChiarulli/LunarVim/blob/0eeaa72729e594a8e17acc17381597ee1cf64e96/lua/lsp/efm-general-ls.lua
-            python = {
-                { LintCommand = 'flake8 --stdin-display-name ${INPUT} -', lintStdin = true, lintFormats = { '%f:%l:%c: %m' } }
-            },
-        }
-    }
-}
+-- nvim_lsp.efm.setup {
+--     cmd = {"efm-langserver","-logfile","/Users/bkane/efm.log"},
+--     init_options = {documentFormatting = true},
+--     filetypes = {"lua", "python"},
+--     settings = {
+--         rootMarkers = {".git/"},
+--         languages = {
+--             lua = {
+--                 {formatCommand = "lua-format -i", formatStdin = true}
+--             },
+--             -- not working - https://github.com/mattn/efm-langserver - could also just try the yaml thing
+--             -- https://github.com/ChristianChiarulli/LunarVim/blob/0eeaa72729e594a8e17acc17381597ee1cf64e96/lua/lsp/efm-general-ls.lua
+--             python = {
+--                 { LintCommand = 'flake8 --stdin-display-name ${INPUT} -', lintStdin = true, lintFormats = { '%f:%l:%c: %m' } }
+--             },
+--         }
+--     }
+-- }
 
 local sumneko_root_path = vim.fn.getenv("HOME") .. "/Git-personal/lua-language-server"
 
@@ -107,7 +107,7 @@ nvim_lsp.sumneko_lua.setup {
   },
 }
 
-vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
 
 -- nvim-compe
 
